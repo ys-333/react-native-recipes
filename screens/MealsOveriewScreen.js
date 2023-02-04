@@ -15,6 +15,9 @@ function MealsOverviewScreen({ navigation, route }) {
         complexity={itemData.item.complexity}
         affordability={itemData.item.affordability}
         duration={itemData.item.duration}
+        ingredients={itemData.item.ingredients}
+        steps={itemData.item.steps}
+        navigation={navigation}
       />
     )
   }
