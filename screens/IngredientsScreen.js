@@ -1,12 +1,51 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, Image, Text, FlatList, StyleSheet } from 'react-native'
 import { useRoute } from '@react-navigation/native'
+import MealDetails from '../components/MealDetails'
 
 function IngredientScreen({}) {
   const route = useRoute()
-  const { ingredients, steps } = route.params
+  const {
+    ingredients,
+    steps,
+    imageUrl,
+    title,
+    duration,
+    complexity,
+    affordability,
+  } = route.params
 
   return (
     <View style={styles.screen}>
+      <View
+        style={{
+          backgroundColor: 'white',
+          width: '90%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginLeft: 12,
+          borderRadius: 6,
+          elevation: 4,
+        }}
+      >
+        <Image
+          style={{
+            height: 200,
+            width: ' 90%',
+            marginVertical: 12,
+            marginLeft: 12,
+            borderRadius: 8,
+            borderWidth: 0.6,
+            borderColor: 'yellow',
+          }}
+          source={{ uri: imageUrl }}
+        />
+        <MealDetails
+          duration={duration}
+          complexity={complexity}
+          affordability={affordability}
+        />
+      </View>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.ingredient}>
         <Text style={styles.title}>Ingredients Screen</Text>
         <FlatList

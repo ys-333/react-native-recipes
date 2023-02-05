@@ -1,6 +1,7 @@
+import { useLayoutEffect } from 'react'
 import { View, Text, FlatList } from 'react-native'
 import MealItem from '../components/MealItem'
-import { MEALS } from '../data/dummy-data'
+import { CATEGORIES, MEALS } from '../data/dummy-data'
 
 function MealsOverviewScreen({ navigation, route }) {
   const { categoryId } = route.params
@@ -21,6 +22,16 @@ function MealsOverviewScreen({ navigation, route }) {
       />
     )
   }
+
+  const catId = route.params.categoryId
+
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find((category) => category.id === catId)
+      .title
+    navigation.setOptions({
+      title: categoryTitle,
+    })
+  }, [catId, navigation])
 
   return (
     <View>
