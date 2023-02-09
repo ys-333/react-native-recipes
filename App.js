@@ -8,7 +8,7 @@ import IngredientScreen from './screens/IngredientsScreen'
 
 export default function App() {
   const Stack = createNativeStackNavigator()
-  // hellow
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -58,3 +58,16 @@ const styles = StyleSheet.create({
   },
   listContainer: {},
 })
+
+/*
+  first you need to import createNavigationStack and NavigationContainer
+
+  const stack = createNavigationStack();
+  <Stack.navigation>
+    <Stack.screen  name="route-name-which should be unique" component={<Componentn/> options={}}/>
+  </stack.navigate>
+
+  and by default you get access to routes and navigation as props to component which is being used as screen
+
+  and other wise you can use useRoute and useNavigation hooks which you can directly import from react-native/stack
+*/
