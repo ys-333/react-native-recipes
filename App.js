@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Button } from 'react-native'
 import CategoriesScreen from './screens/CategoriesScreen'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer } from '@react-navigation/native'
@@ -27,16 +27,36 @@ export default function App() {
             component={CategoriesScreen}
             options={{
               title: 'Meal Category',
+              headerRight: () => {
+                return (
+                  <Button
+                    onPress={() => console.log('you pressed the tap button')}
+                    title="tap"
+                    color="black"
+                  />
+                )
+              },
             }}
           />
           <Stack.Screen
             name="MealsOverview"
             component={MealsOverviewScreen}
-            options={({ route, navigation }) => {
-              const catId = route.params.categoryId
-              return {
-                title: catId,
-              }
+            // options={({ route, navigation }) => {
+            //   const catId = route.params.categoryId
+            //   return {
+            //     title: catId,
+            //   }
+            // }}
+            options={{
+              headerRight: ({ navigation }) => {
+                return (
+                  <Button
+                    title="tap"
+                    onPress={() => console.log(navigation)}
+                    // color="black"
+                  />
+                )
+              },
             }}
           />
           <Stack.Screen

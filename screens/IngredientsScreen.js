@@ -9,9 +9,10 @@ import {
 } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import MealDetails from '../components/MealDetails'
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
+import IconButton from '../components/IconButton'
 
-function IngredientScreen({}) {
+function IngredientScreen({ routes, navigation }) {
   const route = useRoute()
   const {
     ingredients,
@@ -23,9 +24,27 @@ function IngredientScreen({}) {
     affordability,
   } = route.params
 
+  function headerRightButtonHandler() {
+    console.log('pressing header right button')
+  }
+
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
   }, [])
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <IconButton
+            icon="star"
+            color="white"
+            onPress={headerRightButtonHandler}
+          />
+        )
+      },
+    })
+  }, [navigation, headerRightButtonHandler])
 
   return (
     <ScrollView style={{ flex: 1, marginBottom: 32 }}>
