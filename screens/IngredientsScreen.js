@@ -25,7 +25,8 @@ function IngredientScreen({ routes, navigation }) {
   } = route.params
 
   function headerRightButtonHandler() {
-    console.log('pressing header right button')
+    // navigation.navigate('MealsOverview')
+    console.log('you are pressing the header right button')
   }
 
   useEffect(() => {

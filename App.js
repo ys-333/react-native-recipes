@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 })
 
 /*
-  first you need to import createNavigationStack and NavigationContainer
+  first you need to import createNavigationStack and Navigation0.Container
 
   const stack = createNavigationStack();
   <Stack.navigation>
