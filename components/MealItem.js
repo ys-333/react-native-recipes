@@ -9,6 +9,7 @@ import {
 import MealDetails from './MealDetails'
 
 function MealItem({
+  id,
   title,
   imageUrl,
   duration,
@@ -20,6 +21,7 @@ function MealItem({
 }) {
   function IngredientScreen() {
     navigation.navigate('IngredientScreen', {
+      id,
       ingredients,
       steps,
       imageUrl,

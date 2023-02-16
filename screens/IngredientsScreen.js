@@ -7,14 +7,17 @@ import {
   ScrollView,
   LogBox,
 } from 'react-native'
+import { useEffect, useLayoutEffect, useContext } from 'react'
+import { FavoritesContext } from '../store/context/favorites-context'
 import { useRoute } from '@react-navigation/native'
+
 import MealDetails from '../components/MealDetails'
-import { useEffect, useLayoutEffect } from 'react'
 import IconButton from '../components/IconButton'
 
 function IngredientScreen({ routes, navigation }) {
   const route = useRoute()
   const {
+    id,
     ingredients,
     steps,
     imageUrl,
@@ -24,9 +27,14 @@ function IngredientScreen({ routes, navigation }) {
     affordability,
   } = route.params
 
+  const favorite = useContext(FavoritesContext)
+
+  const mealIsFavorite = favorite.ids.includes(id)
+
   function headerRightButtonHandler() {
-    // navigation.navigate('MealsOverview')
-    console.log('you are pressing the header right button')
+    // todo when even we pressed the star, we have to trigger the addFavorite function using useContext ;
+    //todo for that we need id of the meal we want to save
+    favorite.addFavorite(id)
   }
 
   useEffect(() => {
@@ -38,7 +46,7 @@ function IngredientScreen({ routes, navigation }) {
       headerRight: () => {
         return (
           <IconButton
-            icon="star"
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
             color="white"
             onPress={headerRightButtonHandler}
           />

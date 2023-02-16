@@ -1,7 +1,20 @@
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
+import { useContext } from 'react'
+import { FavoritesContext } from '../store/context/favorites-context'
+import { FlatList } from 'react-native-gesture-handler'
 
 const FavoriteScreen = () => {
-  return <Text>Favorite Screen</Text>
+  const favorite = useContext(FavoritesContext)
+
+  return (
+    <View style={{ backgroundColor: 'white' }}>
+      <FlatList
+        data={favorite.ids}
+        renderItem={(itemData) => <Text>{itemData.item}</Text>}
+        keyExtractor={(item) => item}
+      />
+    </View>
+  )
 }
 
 export default FavoriteScreen

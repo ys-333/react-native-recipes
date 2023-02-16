@@ -11,6 +11,7 @@ function MealsOverviewScreen({ navigation, route }) {
   function renderMealItem(itemData) {
     return (
       <MealItem
+        id={itemData.item.id}
         title={itemData.item.title}
         imageUrl={itemData.item.imageUrl}
         complexity={itemData.item.complexity}
