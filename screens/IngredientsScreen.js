@@ -8,8 +8,10 @@ import {
   LogBox,
 } from 'react-native'
 import { useEffect, useLayoutEffect, useContext } from 'react'
-import { FavoritesContext } from '../store/context/favorites-context'
+// import { FavoritesContext } from '../store/context/favorites-context'
 import { useRoute } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
+import { addFavorite, removeFavorite } from '../store/redux/store'
 
 import MealDetails from '../components/MealDetails'
 import IconButton from '../components/IconButton'
@@ -27,19 +29,31 @@ function IngredientScreen({ routes, navigation }) {
     affordability,
   } = route.params
 
-  const favorite = useContext(FavoritesContext)
+  // const favorite = useContext(FavoritesContext)
 
-  const mealIsFavorite = favorite.ids.includes(id)
+  const favoritedIds = useSelector((state) => state.ids)
+  const dispatch = useDispatch()
+
+  const mealIsFavorite = favoritedIds.includes(id)
+
+  console.log(id, mealIsFavorite, favoritedIds)
 
   function headerRightButtonHandler() {
     // todo when even we pressed the star, we have to trigger the addFavorite function using useContext ;
     //todo for that we need id of the meal we want to save
-    favorite.addFavorite(id)
+
+    // we decide whether meal is favorite or not by mealIsFavorite variable
+
+    if (mealIsFavorite) {
+      dispatch(removeFavorite({ id }))
+    } else {
+      dispatch(addFavorite({ id }))
+    }
   }
 
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
-  }, [])
+  }, [mealIsFavorite])
 
   useLayoutEffect(() => {
     navigation.setOptions({

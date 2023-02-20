@@ -1,20 +1,16 @@
-import { Text, View } from 'react-native'
-import { useContext } from 'react'
+import { useSelector } from 'react-redux'
+
 import { FavoritesContext } from '../store/context/favorites-context'
-import { FlatList } from 'react-native-gesture-handler'
+import { MEALS } from '../data/dummy-data'
+import MealList from '../components/MealList/MealList'
 
 const FavoriteScreen = () => {
-  const favorite = useContext(FavoritesContext)
+  // const favorite = useContext(FavoritesContext)
+  const favoriteIds = useSelector((state) => state.ids)
 
-  return (
-    <View style={{ backgroundColor: 'white' }}>
-      <FlatList
-        data={favorite.ids}
-        renderItem={(itemData) => <Text>{itemData.item}</Text>}
-        keyExtractor={(item) => item}
-      />
-    </View>
-  )
+  const favoriteMeals = MEALS.filter((meal) => favoriteIds.includes(meal.id))
+
+  return <MealList items={favoriteMeals} />
 }
 
 export default FavoriteScreen
